@@ -7,6 +7,9 @@ namespace Garage2._0.Models
 {
     public class dummy2
     {
+        public int MyProperty1 { get; set; }
+        public int NoOfWheels { get; set; }
+
         public string srt { get; set; }
     }
 }
