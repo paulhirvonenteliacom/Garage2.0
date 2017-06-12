@@ -128,7 +128,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ParkedVehicle.cs" />
-    <Compile Include="Models\dummy2.cs" />
     <Compile Include="Models\Vehicles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

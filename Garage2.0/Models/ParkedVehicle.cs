@@ -20,8 +20,9 @@ namespace Garage2._0.Models
         [Display(Name = "Typ av fordon")]
         public VehicleType TypeOfVehicle { get; set; }
 
-        [Required]
         [Display(Name = "Registeringsnummer")]
+        [Required(ErrorMessage = "{0} måste anges!")]
+        [RegularExpression(@"\D{1,3}\w+", ErrorMessage = "Ange ett giltigt {0}")]
         [MaxLength(16)]
         public string RegNumber { get; set; }
 
