@@ -8,7 +8,7 @@ namespace Garage2._0.DataAccess
 {
     public class GarageContext : DbContext
     {
-        public GarageContext() : base("DefaultConnection")
+        public GarageContext() : base("Garage2.0")
         {
 
         }
