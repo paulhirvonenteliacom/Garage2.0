@@ -18,7 +18,7 @@ namespace Garage2._0.Models
 
         [Required]
         [Display(Name = "Typ av fordon")]
-        public VehicleType TypeOfVehicle { get; set; }
+        public TypeOfVehicle TypeOfVehicle { get; set; }
 
         [Display(Name = "Registeringsnummer")]
         [Required(ErrorMessage = "{0} måste anges!")]
