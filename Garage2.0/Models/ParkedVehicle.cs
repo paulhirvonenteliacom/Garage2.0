@@ -1,0 +1,47 @@
+﻿using Garage2._0.Enum;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Garage2._0.Models
+{
+    public class ParkedVehicle
+    {
+        public ParkedVehicle()
+        {
+            CheckInTime = DateTime.Now;
+        }
+
+        public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Typ av fordon")]
+        public VehicleType TypeOfVehicle { get; set; }
+
+        [Required]
+        [Display(Name = "Registeringsnummer")]
+        [MaxLength(16)]
+        public string RegNumber { get; set; }
+
+        [MaxLength(30)]
+        [Display(Name = "Färg")]
+        public string Color { get; set; }
+
+        [Range(0, 20)]
+        [Display(Name = "Antal hjul")]
+        public int NoOfWheels { get; set; }
+
+        [MaxLength(30)]
+        [Display(Name = "Märke")]
+        public string Brand { get; set; }
+
+        [MaxLength(30)]
+        [Display(Name = "Modell")]
+        public string Model { get; set; }
+
+        [Editable(false)]
+        public DateTime CheckInTime { get; }
+    }
+}
