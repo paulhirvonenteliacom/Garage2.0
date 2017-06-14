@@ -131,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ParkedVehiclesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
     <Compile Include="Enum\VehicleType.cs" />
     <Compile Include="Global.asax.cs">
@@ -143,7 +144,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ParkedVehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\ParkedVehiclesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -166,6 +166,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\ParkedVehicles\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -184,7 +185,8 @@
     <Content Include="Views\ParkedVehicles\Delete.cshtml" />
     <Content Include="Views\ParkedVehicles\Details.cshtml" />
     <Content Include="Views\ParkedVehicles\Edit.cshtml" />
-    <Content Include="Views\ParkedVehicles\Index.cshtml" />
+    <Content Include="Views\ParkedVehicles\Park.cshtml" />
+    <Content Include="Views\ParkedVehicles\IndexSort.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

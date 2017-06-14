@@ -8,17 +8,92 @@ using System.Web;
 using System.Web.Mvc;
 using Garage2._0.DataAccess;
 using Garage2._0.Models;
+using static Garage2._0.Enum.TypeOfVehicle;
 
-namespace Garage2._0.Views
+namespace Garage2._0.Controllers
 {
     public class ParkedVehiclesController : Controller
     {
         private GarageContext db = new GarageContext();
 
-        // GET: ParkedVehicles
-        public ActionResult Index()
+        public ActionResult Index(string typeOfVehicle = "", string orderBy = "")
         {
-            return View(db.ParkedVehicles.ToList());
+            var parkedVehicles = db.ParkedVehicles.Select(pv => pv);
+
+            ViewBag.Fordon = "fordon";
+            ViewBag.TypeOfVehicle = typeOfVehicle; //="AllTypes";
+
+            if (typeOfVehicle != "") // || typeOfVehicle != "AllTypes"
+            {
+                switch (typeOfVehicle.ToUpper())
+                {
+                    case "CAR":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+                    case "BUS":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+                    case "BOAT":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                    case "AIRPLANE":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+                    case "MOTORCYCLE":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                     
+                }
+                if (parkedVehicles.Count() == 0) return HttpNotFound();
+            }
+
+            if (orderBy != "")
+                switch (orderBy.ToUpper())
+                {
+                    case "TYPEOFVEHICLE": parkedVehicles = parkedVehicles.OrderBy(pv => pv.TypeOfVehicle); /*ViewBag.Fordon = "bilar"; ViewBag.OrderBy = "TypeOfVehicle";*/ break;
+                    case "REGNUMBER": parkedVehicles = parkedVehicles.OrderBy(pv => pv.RegNumber); /*ViewBag.OrderBy = "RegNumber";*/ break;
+                    case "COLOR": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Color); /*ViewBag.OrderBy = "Color";*/ break;
+                    case "NOOFWHEELS": parkedVehicles = parkedVehicles.OrderBy(pv => pv.NoOfWheels);/* ViewBag.OrderBy = "NoOfWheels";*/ break;
+                    case "BRAND": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Brand); /*ViewBag.OrderBy = "Brand";*/ break;
+                    case "MODEL": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Model); /*ViewBag.OrderBy = "Model";*/ break;
+                }
+
+            return View(parkedVehicles.ToList());
+
+        }
+        // GET: Sort parkedVehicles
+        public ActionResult IndexSort(string typeOfVehicle = "", string orderBy = "")
+        {
+            var parkedVehicles = db.ParkedVehicles.Select(pv => pv);
+
+            ViewBag.Fordon = "fordon";
+            ViewBag.TypeOfVehicle = typeOfVehicle;
+
+            if (typeOfVehicle != "")
+            {
+                switch (typeOfVehicle.ToUpper())
+                {
+                    case "CAR":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+                    case "BUS":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+                    case "BOAT":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                    case "AIRPLANE":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+                    case "MOTORCYCLE":
+                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                }
+                if (parkedVehicles.Count() == 0) return HttpNotFound();
+            }
+
+            if (orderBy != "")
+                switch (orderBy.ToUpper())
+            {
+                    case "TYPEOFVEHICLE": parkedVehicles = parkedVehicles.OrderBy(pv=>pv.TypeOfVehicle); break;
+                    case "REGNUMBER": parkedVehicles = parkedVehicles.OrderBy(pv => pv.RegNumber); break;
+                    case "COLOR": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Color); break;
+                    case "NOOFWHEELS": parkedVehicles = parkedVehicles.OrderBy(pv => pv.NoOfWheels); break;
+                    case "BRAND": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Brand); break;
+                    case "MODEL": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Model); break;
+                }
+
+            return View(parkedVehicles.ToList());
         }
 
         // GET: ParkedVehicles/Details/5
@@ -54,6 +129,26 @@ namespace Garage2._0.Views
                 db.ParkedVehicles.Add(parkedVehicle);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(parkedVehicle);
+        }
+
+        // GET: ParkedVehicles/Park
+        public ActionResult Park()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Park([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] ParkedVehicle parkedVehicle)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ParkedVehicles.Add(parkedVehicle);
+                db.SaveChanges();
+                return RedirectToAction("IndexSort");
             }
 
             return View(parkedVehicle);

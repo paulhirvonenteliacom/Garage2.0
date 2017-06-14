@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Garage2._0.Models.ParkedVehicle>
+
+@{
+    ViewBag.Title = "Sortera parkerade " + ViewBag.Fordon+ " i garaget";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+   @if (ViewBag.Fordon.Equals("bilar"))
+   {
+       @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Car" });
+   }
+  else if (ViewBag.Fordon.Equals("bussar"))
+  { 
+      @Html.ActionLink("Parkera ny buss i garaget", "Park", new { typeOfVehicle = "Bus" });
+  }
+  else if (ViewBag.Fordon.Equals("båtar"))
+  {
+      @Html.ActionLink("Parkera ny båt i garaget", "Park", new { typeOfVehicle = "Boat" });
+  }
+  else if (ViewBag.Fordon.Equals("flygplan"))
+  { 
+      @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { typeOfVehicle = "Airplane" });
+  }
+  else if (ViewBag.Fordon.Equals("motorcykel"))
+  {
+      @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { typeOfVehicle = "Motorcycle" });
+  }
+  else
+  {
+      @Html.ActionLink("Parkera nytt fordon i garaget", "Park");
+  }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @if (ViewBag.TypeOfVehicle.Equals(""))
+            {
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.TypeOfVehicle).ToString()), "IndexSort", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
+            }
+        </th>
+        <th>
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "IndexSort", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber"})
+        </th>
+        <th>
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Color).ToString()), "IndexSort", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Color" }) 
+        </th>
+        <th>
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.NoOfWheels).ToString()), "IndexSort", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "NoOfWheels" })
+        </th>
+        <th>
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Brand).ToString()), "IndexSort", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Brand"}) 
+        </th>
+        <th>
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Model).ToString()), "IndexSort", new { typeOfVehicle = ViewBag.TypeOfVehicle,  orderBy = "Model" })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+@if (ViewBag.TypeOfVehicle.Equals(""))
+{
+    if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Car)
+    {
+        @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "IndexSort", new { typeOfVehicle = "Car" })
+    }
+    else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Bus)
+    {
+        @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "IndexSort", new { typeOfVehicle = "Bus" })
+    }
+    else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Boat)
+    {
+        @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "IndexSort", new { typeOfVehicle = "Boat" })
+    }
+    else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Airplane)
+    {
+        @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "IndexSort", new { typeOfVehicle = "Airplane" })
+    }
+    else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Motorcycle)
+    {
+        @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "IndexSort", new { typeOfVehicle = "Motorcycle" })
+    }
+}
+else { HttpUtility.HtmlDecode("x"+ViewBag.TypeOfVehicle+"x"); }
+        </td>
+        <td>  
+            @Html.DisplayFor(modelItem => item.RegNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfWheels)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.ActionLink("Ändra", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detaljerat", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Kvitto", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
