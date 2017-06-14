@@ -16,44 +16,10 @@ namespace Garage2._0.Controllers
     {
         private GarageContext db = new GarageContext();
 
-        public ActionResult Index(string typeOfVehicle = "", string orderBy = "")
+        public ActionResult Index()
         {
-            var parkedVehicles = db.ParkedVehicles.Select(pv => pv);
-
-            ViewBag.Fordon = "fordon";
-            ViewBag.TypeOfVehicle = typeOfVehicle; //="AllTypes";
-
-            if (typeOfVehicle != "") // || typeOfVehicle != "AllTypes"
-            {
-                switch (typeOfVehicle.ToUpper())
-                {
-                    case "CAR":
-                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
-                    case "BUS":
-                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
-                    case "BOAT":
-                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
-                    case "AIRPLANE":
-                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
-                    case "MOTORCYCLE":
-                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
-                     
-                }
-                if (parkedVehicles.Count() == 0) return HttpNotFound();
-            }
-
-            if (orderBy != "")
-                switch (orderBy.ToUpper())
-                {
-                    case "TYPEOFVEHICLE": parkedVehicles = parkedVehicles.OrderBy(pv => pv.TypeOfVehicle); /*ViewBag.Fordon = "bilar"; ViewBag.OrderBy = "TypeOfVehicle";*/ break;
-                    case "REGNUMBER": parkedVehicles = parkedVehicles.OrderBy(pv => pv.RegNumber); /*ViewBag.OrderBy = "RegNumber";*/ break;
-                    case "COLOR": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Color); /*ViewBag.OrderBy = "Color";*/ break;
-                    case "NOOFWHEELS": parkedVehicles = parkedVehicles.OrderBy(pv => pv.NoOfWheels);/* ViewBag.OrderBy = "NoOfWheels";*/ break;
-                    case "BRAND": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Brand); /*ViewBag.OrderBy = "Brand";*/ break;
-                    case "MODEL": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Model); /*ViewBag.OrderBy = "Model";*/ break;
-                }
-
-            return View(parkedVehicles.ToList());
+            
+            return View(db.ParkedVehicles.ToList());
 
         }
         // GET: Sort parkedVehicles
