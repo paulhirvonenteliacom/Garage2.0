@@ -47,7 +47,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] ParkedVehicle parkedVehicle)
+        public ActionResult Create([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,CheckOutTime,ParkingDuration,ParkingFee")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] ParkedVehicle parkedVehicle)
+        public ActionResult Edit([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,CheckOutTime,ParkingDuration,ParkingFee")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {
@@ -111,9 +111,30 @@ namespace Garage2._0.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ParkedVehicle parkedVehicle = db.ParkedVehicles.Find(id);
+            var checkOutTime = DateTime.Now;
+            TimeSpan parkingDuration = checkOutTime - parkedVehicle.CheckInTime;
+            ViewBag.CheckOutTime = checkOutTime;
+            ViewBag.ParkingFee = Fee(parkingDuration);
+            string pDuration;
+            if (parkingDuration.Days > 0)
+            {
+                pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (timmar:minuter: sekunder)";
+            }
+            else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (timmar:minuter:sekunder)";
+            ViewBag.ParkingDuration = pDuration;
+            
             db.ParkedVehicles.Remove(parkedVehicle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return View("Receipt", parkedVehicle);
+        }
+
+        private decimal Fee(TimeSpan parkingDuration)
+        {
+            if ((parkingDuration.Minutes % 10) > 0 || ((parkingDuration.Minutes % 10 == 0) && (parkingDuration.Seconds > 0)))
+            {
+                return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10) + 1);
+            }
+            return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10));
         }
 
         protected override void Dispose(bool disposing)
