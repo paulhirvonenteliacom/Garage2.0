@@ -9,6 +9,14 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Reg.Nummer: @Html.TextBox("SearchNumberPlate")
+        <input type="submit" value="Sök" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>

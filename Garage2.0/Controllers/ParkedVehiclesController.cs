@@ -16,8 +16,16 @@ namespace Garage2._0.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: ParkedVehicles
-        public ActionResult Index()
+
+        public ActionResult Index(string searchNumberPlate)
         {
+            var parkedVehicle = from p in db.ParkedVehicles select p;
+
+            if (!String.IsNullOrEmpty(searchNumberPlate))
+            {
+                parkedVehicle = parkedVehicle.Where(p => p.RegNumber.Equals(searchNumberPlate));
+                return View(parkedVehicle);
+            }
             return View(db.ParkedVehicles.ToList());
         }
 
