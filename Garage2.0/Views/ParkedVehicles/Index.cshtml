@@ -32,6 +32,14 @@
       @Html.ActionLink("Parkera nytt fordon i garaget", "Park");
   }
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Reg.Nummer: @Html.TextBox("SearchNumberPlate")
+        <input type="submit" value="Sök" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -98,7 +106,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Checka ut", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

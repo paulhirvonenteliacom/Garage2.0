@@ -16,12 +16,20 @@ namespace Garage2._0.Controllers
     {
         private GarageContext db = new GarageContext();
 
-        public ActionResult Index()
-        {
-            
-            return View(db.ParkedVehicles.ToList());
+        // GET: ParkedVehicles
 
+        public ActionResult Index(string searchNumberPlate)
+        {
+            var parkedVehicle = from p in db.ParkedVehicles select p;
+
+            if (!String.IsNullOrEmpty(searchNumberPlate))
+            {
+                parkedVehicle = parkedVehicle.Where(p => p.RegNumber.Equals(searchNumberPlate));
+                return View(parkedVehicle);
+            }
+            return View(db.ParkedVehicles.ToList());
         }
+
         // GET: Sort parkedVehicles
         public ActionResult IndexSort(string typeOfVehicle = "", string orderBy = "")
         {
@@ -50,8 +58,8 @@ namespace Garage2._0.Controllers
 
             if (orderBy != "")
                 switch (orderBy.ToUpper())
-            {
-                    case "TYPEOFVEHICLE": parkedVehicles = parkedVehicles.OrderBy(pv=>pv.TypeOfVehicle); break;
+                {
+                    case "TYPEOFVEHICLE": parkedVehicles = parkedVehicles.OrderBy(pv => pv.TypeOfVehicle); break;
                     case "REGNUMBER": parkedVehicles = parkedVehicles.OrderBy(pv => pv.RegNumber); break;
                     case "COLOR": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Color); break;
                     case "NOOFWHEELS": parkedVehicles = parkedVehicles.OrderBy(pv => pv.NoOfWheels); break;
@@ -61,7 +69,7 @@ namespace Garage2._0.Controllers
 
             return View(parkedVehicles.ToList());
         }
-
+        
         // GET: ParkedVehicles/Details/5
         public ActionResult Details(int? id)
         {
@@ -88,7 +96,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] ParkedVehicle parkedVehicle)
+        public ActionResult Create([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,CheckOutTime,ParkingDuration,ParkingFee")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {
@@ -140,7 +148,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] ParkedVehicle parkedVehicle)
+        public ActionResult Edit([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,CheckOutTime,ParkingDuration,ParkingFee")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {
@@ -172,9 +180,30 @@ namespace Garage2._0.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ParkedVehicle parkedVehicle = db.ParkedVehicles.Find(id);
+            var checkOutTime = DateTime.Now;
+            TimeSpan parkingDuration = checkOutTime - parkedVehicle.CheckInTime;
+            ViewBag.CheckOutTime = checkOutTime;
+            ViewBag.ParkingFee = Fee(parkingDuration);
+            string pDuration;
+            if (parkingDuration.Days > 0)
+            {
+                pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (timmar:minuter: sekunder)";
+            }
+            else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (timmar:minuter:sekunder)";
+            ViewBag.ParkingDuration = pDuration;
+            
             db.ParkedVehicles.Remove(parkedVehicle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return View("Receipt", parkedVehicle);
+        }
+
+        private decimal Fee(TimeSpan parkingDuration)
+        {
+            if ((parkingDuration.Minutes % 10) > 0 || ((parkingDuration.Minutes % 10 == 0) && (parkingDuration.Seconds > 0)))
+            {
+                return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10) + 1);
+            }
+            return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10));
         }
 
         protected override void Dispose(bool disposing)
