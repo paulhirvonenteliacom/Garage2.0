@@ -141,10 +141,6 @@
     <Compile Include="Migrations\201706121317060_Initial.Designer.cs">
       <DependentUpon>201706121317060_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706131202446_CheckInTimeInSeed.cs" />
-    <Compile Include="Migrations\201706131202446_CheckInTimeInSeed.Designer.cs">
-      <DependentUpon>201706131202446_CheckInTimeInSeed.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ParkedVehicle.cs" />
     <Compile Include="Models\Vehicles.cs" />
@@ -190,7 +186,6 @@
     <Content Include="Views\ParkedVehicles\Details.cshtml" />
     <Content Include="Views\ParkedVehicles\Edit.cshtml" />
     <Content Include="Views\ParkedVehicles\Index.cshtml" />
-    <Content Include="Views\ParkedVehicles\Receipt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -206,9 +201,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706121317060_Initial.resx">
       <DependentUpon>201706121317060_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706131202446_CheckInTimeInSeed.resx">
-      <DependentUpon>201706131202446_CheckInTimeInSeed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

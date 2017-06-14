@@ -43,7 +43,6 @@ namespace Garage2._0.Models
         public string Model { get; set; }
 
         [Editable(false)]
-        [Display(Name = "Check-in tid")]
-        public DateTime CheckInTime { get; set; }
+        public DateTime CheckInTime { get; }
     }
 }
