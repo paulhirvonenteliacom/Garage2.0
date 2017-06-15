@@ -58,6 +58,8 @@ namespace Garage2._0.Controllers
                 parkedVehicles = parkedVehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
             }
 
+            ViewBag.NoOfParkedVehicles = parkedVehicles.Count();
+
             return View(parkedVehicles.ToList());
         }
         
@@ -87,7 +89,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,CheckOutTime,ParkingDuration,ParkingFee")] ParkedVehicle parkedVehicle)
+        public ActionResult Create([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +143,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,CheckOutTime,ParkingDuration,ParkingFee")] ParkedVehicle parkedVehicle)
+        public ActionResult Edit([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {

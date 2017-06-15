@@ -39,6 +39,10 @@
         Reg.Nummer: @Html.TextBox("SearchNumberPlate")
         <input type="submit" value="Sök" />
     </p>
+
+    <p>
+        Antal parkerade @ViewBag.Fordon: @ViewBag.NoOfParkedVehicles
+    </p>
 }
 <table style="border-style:solid;border-color:darkblue;border-width:2px" class="table">
     <tr>
