@@ -122,15 +122,16 @@ namespace Garage2._0.Controllers
             var checkOutTime = DateTime.Now;
             TimeSpan parkingDuration = checkOutTime - parkedVehicle.CheckInTime;
             ViewBag.CheckOutTime = checkOutTime;
+
             ViewBag.ParkingFee = Fee(parkingDuration);
             string pDuration;
             if (parkingDuration.Days > 0)
             {
-                pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (timmar:minuter: sekunder)";
+                pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
             }
-            else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (timmar:minuter:sekunder)";
+            else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
             ViewBag.ParkingDuration = pDuration;
-            
+
             db.ParkedVehicles.Remove(parkedVehicle);
             db.SaveChanges();
             return View("Receipt", parkedVehicle);

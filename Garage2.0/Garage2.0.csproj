@@ -137,6 +137,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706140936280_DisplayFormatCheckInTime.cs" />
+    <Compile Include="Migrations\201706140936280_DisplayFormatCheckInTime.Designer.cs">
+      <DependentUpon>201706140936280_DisplayFormatCheckInTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706140942552_DisplayFormatCheckInTimeII.cs" />
+    <Compile Include="Migrations\201706140942552_DisplayFormatCheckInTimeII.Designer.cs">
+      <DependentUpon>201706140942552_DisplayFormatCheckInTimeII.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706140945459_DisplayFormatCheckInTimeIII.cs" />
+    <Compile Include="Migrations\201706140945459_DisplayFormatCheckInTimeIII.Designer.cs">
+      <DependentUpon>201706140945459_DisplayFormatCheckInTimeIII.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706141023369_DisplayFormatCheckInTimeIV.cs" />
+    <Compile Include="Migrations\201706141023369_DisplayFormatCheckInTimeIV.Designer.cs">
+      <DependentUpon>201706141023369_DisplayFormatCheckInTimeIV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706150614420_Test.cs" />
+    <Compile Include="Migrations\201706150614420_Test.Designer.cs">
+      <DependentUpon>201706150614420_Test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ParkedVehicle.cs" />
     <Compile Include="Models\Vehicles.cs" />
@@ -186,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -194,6 +215,23 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706140936280_DisplayFormatCheckInTime.resx">
+      <DependentUpon>201706140936280_DisplayFormatCheckInTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706140942552_DisplayFormatCheckInTimeII.resx">
+      <DependentUpon>201706140942552_DisplayFormatCheckInTimeII.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706140945459_DisplayFormatCheckInTimeIII.resx">
+      <DependentUpon>201706140945459_DisplayFormatCheckInTimeIII.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706141023369_DisplayFormatCheckInTimeIV.resx">
+      <DependentUpon>201706141023369_DisplayFormatCheckInTimeIV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706150614420_Test.resx">
+      <DependentUpon>201706150614420_Test.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

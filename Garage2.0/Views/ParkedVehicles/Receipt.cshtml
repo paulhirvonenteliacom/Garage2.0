@@ -4,10 +4,9 @@
     ViewBag.Title = "Kvitto";
 }
 
-<h2>Details</h2>
+<h1>Kvitto</h1>
 
 <div>
-    <h4>Kvitto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.RegNumber)</dt>
@@ -16,32 +15,22 @@
         <dt>@Html.DisplayNameFor(model => model.TypeOfVehicle)</dt>
         <dd>@Html.DisplayFor(model => model.TypeOfVehicle)</dd>
 
-        @*<dt>@Html.DisplayNameFor(model => model.Color)</dt>
-        <dd>@Html.DisplayFor(model => model.Color)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.NoOfWheels)</dt>
-        <dd>@Html.DisplayFor(model => model.NoOfWheels)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Brand)</dt>
-        <dd>@Html.DisplayFor(model => model.Brand)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Model)</dt>
-        <dd>@Html.DisplayFor(model => model.Model)</dd>*@
-
         <dt>Check-in tid</dt>
         <dd>@Html.DisplayFor(model => model.CheckInTime)</dd>
 
         <dt>Check-ut tid</dt>
-        <dd>@ViewBag.CheckOutTime</dd>
+        <dd>@ViewBag.CheckOutTime.ToString("hh:mm:ss" + " ddd d MMM")</dd>
 
         <dt>Parkeringstid</dt>
         <dd>@ViewBag.ParkingDuration</dd>
 
         <dt>Parkeringsavgift</dt>
-        <dd>@ViewBag.ParkingFee kronor</dd>
+        <dd>@ViewBag.ParkingFee kr</dd>
 
+        <dt>Varav moms (25%)</dt>
+        <dd>@(ViewBag.ParkingFee/4) kr</dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tillbaka till listan", "Index")
 </p>
