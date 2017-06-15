@@ -33,13 +33,19 @@
   }
 </p>
 
-@using (Html.BeginForm()) @*<form method="GET" action="Index?typeOfVehicle=@ViewBag.typeOfVehicle" >*@
+@*<form method="GET" action="Index?typeOfVehicle=@ViewBag.typeOfVehicle" >*@
+@using (Html.BeginForm())
 {
     <p> 
         Reg.Nummer: @Html.TextBox("SearchNumberPlate")
         <input type="submit" value="Sök" />
     </p>
-} <!-- </form> -->
+
+    <p>
+        Antal parkerade @ViewBag.Fordon: @ViewBag.NoOfParkedVehicles
+    </p>
+}
+<!-- </form> -->
 <table style="border-style:solid;border-color:darkblue;border-width:2px" class="table">
     <tr>
         <th>
