@@ -1,14 +1,12 @@
 ﻿@model Garage2._0.Models.ParkedVehicle
 
 @{
-    ViewBag.Title = "Checka ut";
+    ViewBag.Title = "Checka ut parkerat fordon";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Parkerat fordon</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -66,7 +64,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Checka ut" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Tillbaka till garaget", "Index")
         </div>
     }
 </div>

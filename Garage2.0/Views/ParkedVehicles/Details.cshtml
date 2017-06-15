@@ -1,13 +1,12 @@
 ﻿@model Garage2._0.Models.ParkedVehicle
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detaljerade fordonsuppgifter";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>ParkedVehicle</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -61,6 +60,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Ändra fordonsuppgifter", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Tillbaka till garaget", "Index")
 </p>
