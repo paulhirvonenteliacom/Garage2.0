@@ -16,22 +16,8 @@ namespace Garage2._0.Controllers
     {
         private GarageContext db = new GarageContext();
 
-        // GET: ParkedVehicles
-
-        public ActionResult Index(string searchNumberPlate)
-        {
-            var parkedVehicle = from p in db.ParkedVehicles select p;
-
-            if (!String.IsNullOrEmpty(searchNumberPlate))
-            {
-                parkedVehicle = parkedVehicle.Where(p => p.RegNumber.Equals(searchNumberPlate));
-                return View(parkedVehicle);
-            }
-            return View(db.ParkedVehicles.ToList());
-        }
-
-        // GET: Sort parkedVehicles
-        public ActionResult IndexSort(string typeOfVehicle = "", string orderBy = "")
+        // GET: ParkedVehicles/Index
+        public ActionResult Index(string searchNumberPlate = "",string typeOfVehicle = "", string orderBy = "")
         {
             var parkedVehicles = db.ParkedVehicles.Select(pv => pv);
 
@@ -66,6 +52,11 @@ namespace Garage2._0.Controllers
                     case "BRAND": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Brand); break;
                     case "MODEL": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Model); break;
                 }
+
+            if (!String.IsNullOrEmpty(searchNumberPlate))
+            {
+                parkedVehicles = parkedVehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
+            }
 
             return View(parkedVehicles.ToList());
         }
@@ -109,8 +100,10 @@ namespace Garage2._0.Controllers
         }
 
         // GET: ParkedVehicles/Park
-        public ActionResult Park()
+        public ActionResult Park(string typeOfVehicle)
         {
+            ViewBag.TypeOfVehicle = typeOfVehicle;
+
             return View();
         }
 
@@ -122,7 +115,7 @@ namespace Garage2._0.Controllers
             {
                 db.ParkedVehicles.Add(parkedVehicle);
                 db.SaveChanges();
-                return RedirectToAction("IndexSort");
+                return RedirectToAction("Index");
             }
 
             return View(parkedVehicle);

@@ -15,12 +15,14 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+            <!-- if (!ViewBag.TypeOfVehicle.Equals("")) {}-->
             @Html.LabelFor(model => model.TypeOfVehicle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.TypeOfVehicle, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TypeOfVehicle, "", new { @class = "text-danger" })
             </div>
         </div>
+        <!--}-->
 
         <div class="form-group">
             @Html.LabelFor(model => model.RegNumber, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -71,7 +73,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "IndexSort")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
