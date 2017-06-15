@@ -1,13 +1,36 @@
 ﻿@model IEnumerable<Garage2._0.Models.ParkedVehicle>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Parkerade " + ViewBag.Fordon + " i garaget";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+   @if (ViewBag.Fordon.Equals("bilar"))
+   {
+       @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Car" });
+   }
+  else if (ViewBag.Fordon.Equals("bussar"))
+  { 
+      @Html.ActionLink("Parkera ny buss i garaget", "Park", new { typeOfVehicle = "Bus" });
+  }
+  else if (ViewBag.Fordon.Equals("båtar"))
+  {
+      @Html.ActionLink("Parkera ny båt i garaget", "Park", new { typeOfVehicle = "Boat" });
+  }
+  else if (ViewBag.Fordon.Equals("flygplan"))
+  { 
+      @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { typeOfVehicle = "Airplane" });
+  }
+  else if (ViewBag.Fordon.Equals("motorcykel"))
+  {
+      @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { typeOfVehicle = "Motorcycle" });
+  }
+  else
+  {
+      @Html.ActionLink("Parkera nytt fordon i garaget", "Park");
+  }
 </p>
 
 @using (Html.BeginForm())
@@ -20,32 +43,52 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TypeOfVehicle)
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.TypeOfVehicle).ToString()), "IndexSort", new { typOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RegNumber)
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "IndexSort", new { typOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber"})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Color)
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Color).ToString()), "IndexSort", new { typOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Color" }) 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NoOfWheels)
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.NoOfWheels).ToString()), "IndexSort", new { typOfVehicle = ViewBag.TypeOfVehicle, orderBy = "NoOfWheels" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brand)
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Brand).ToString()), "IndexSort", new { typOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Brand"}) 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Model).ToString()), "IndexSort", new { typOfVehicle = ViewBag.TypeOfVehicle,  orderBy = "Model" })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TypeOfVehicle)
+           @if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Car)
+           {
+            @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "IndexSort", new { typeOfVehicle = "Car" })
+           }
+           else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Bus)
+           {
+            @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "IndexSort", new { typeOfVehicle = "Bus" })
+           }
+           else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Boat)
+           {
+            @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "IndexSort", new { typeOfVehicle = "Boat" })
+           }
+           else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Airplane)
+           {
+            @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "IndexSort", new { typeOfVehicle = "Airplane" })
+           }
+           else if (item.TypeOfVehicle == Garage2._0.Enum.TypeOfVehicle.Motorcycle)
+           {
+            @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "IndexSort", new { typeOfVehicle = "Motorcycle" })
+           }
         </td>
-        <td>
+        <td>  
             @Html.DisplayFor(modelItem => item.RegNumber)
         </td>
         <td>
