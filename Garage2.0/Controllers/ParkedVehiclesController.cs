@@ -58,6 +58,8 @@ namespace Garage2._0.Controllers
                 parkedVehicles = parkedVehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
             }
 
+            ViewBag.NoOfParkedVehicles = parkedVehicles.Count();
+
             return View(parkedVehicles.ToList());
         }
         
