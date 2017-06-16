@@ -36,3 +36,24 @@ footer {
     bottom: 0;
 }
 
+#white-text {
+   color:#deea42;
+   padding-left: 100px;
+   font-size: 40px;
+   text-shadow: 4px 4px #3b2ee2;
+}
+
+#welcome {
+   color:#deea42;
+   padding-top: 220px;
+   padding-left: 100px;
+   font-size: 65px;
+   text-shadow: 4px 4px #3b2ee2;
+}
+
+a { text-decoration:none; color:darkblue; font-weight:bold; }
+a:link    { color:darkblue; }
+a:visited { color:darkblue; }
+a:active  { color:#d00000; }
+a:hover   { color:#d00000; }
+a:focus   { color:#d00000; }
