@@ -19,15 +19,13 @@
                 @Html.ActionLink("Garage 2.5", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @*<nav class="navbar navbar-inverse">*@
-                    @*<div class="container-fluid">*@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tjänster<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="Members/Index">Medlemmar</a></li>
-                                <li><a href="VehicleBase/Index">Fordonsöversikt</a></li>
-                                <li><a href="Vehicles/Index">Detaljerad fordonsöversikt</a></li>
+                                <li>@Html.ActionLink("Fordonsöversikt", "Index", "Vehicles")</li>
+                                <li>@Html.ActionLink("Detaljerad fordonsöversikt", "DetailedIndex", "Vehicles")</li>
                             </ul>
                         </li>
                         <li>@Html.ActionLink("Om oss", "About", "Home")</li>
@@ -43,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Garage 2.0</p>
+            <p>&copy; @DateTime.Now.Year - Garage 2.5</p>
         </footer>
     </div>
 

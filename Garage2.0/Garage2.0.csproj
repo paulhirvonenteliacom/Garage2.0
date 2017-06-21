@@ -135,6 +135,27 @@
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
+    <Compile Include="Migrations\201706211104413_InitialCreate.cs" />
+    <Compile Include="Migrations\201706211104413_InitialCreate.Designer.cs">
+      <DependentUpon>201706211104413_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706211152514_TypeOfVehicle.cs" />
+    <Compile Include="Migrations\201706211152514_TypeOfVehicle.Designer.cs">
+      <DependentUpon>201706211152514_TypeOfVehicle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706211243285_AddIdVehicleBase.cs" />
+    <Compile Include="Migrations\201706211243285_AddIdVehicleBase.Designer.cs">
+      <DependentUpon>201706211243285_AddIdVehicleBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706211329386_FordonstypVehicle.cs" />
+    <Compile Include="Migrations\201706211329386_FordonstypVehicle.Designer.cs">
+      <DependentUpon>201706211329386_FordonstypVehicle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706211355398_Medlemsnamn.cs" />
+    <Compile Include="Migrations\201706211355398_Medlemsnamn.Designer.cs">
+      <DependentUpon>201706211355398_Medlemsnamn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehicleBase.cs" />
@@ -179,12 +200,12 @@
     <Content Include="Views\ParkedVehicles\Delete.cshtml" />
     <Content Include="Views\ParkedVehicles\Details.cshtml" />
     <Content Include="Views\ParkedVehicles\Edit.cshtml" />
-    <Content Include="Views\ParkedVehicles\Park.cshtml" />
+    <Content Include="Views\Vehicles\Park.cshtml" />
     <Content Include="Views\ParkedVehicles\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\ParkedVehicles\Receipt.cshtml" />
+    <Content Include="Views\Vehicles\Receipt.cshtml" />
     <Content Include="Views\VehicleTypes\Create.cshtml" />
     <Content Include="Views\VehicleTypes\Delete.cshtml" />
     <Content Include="Views\VehicleTypes\Details.cshtml" />
@@ -213,6 +234,23 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706211104413_InitialCreate.resx">
+      <DependentUpon>201706211104413_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211152514_TypeOfVehicle.resx">
+      <DependentUpon>201706211152514_TypeOfVehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211243285_AddIdVehicleBase.resx">
+      <DependentUpon>201706211243285_AddIdVehicleBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211329386_FordonstypVehicle.resx">
+      <DependentUpon>201706211329386_FordonstypVehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706211355398_Medlemsnamn.resx">
+      <DependentUpon>201706211355398_Medlemsnamn.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

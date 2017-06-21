@@ -47,6 +47,8 @@ namespace Garage2._0.Models
         public int VehicleTypeId { get; set; }
 
         public virtual Member Member { get; set; }
+
+        [Display(Name = "Fordonstyp")]
         public virtual VehicleType VehicleType { get; set; }
     }
 }
