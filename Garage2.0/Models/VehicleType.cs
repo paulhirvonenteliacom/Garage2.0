@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Garage2._0.Enum
+namespace Garage2._0.Models
 {
     public enum TypeOfVehicle
     {
@@ -18,5 +18,11 @@ namespace Garage2._0.Enum
         Airplane,
         [Display(Name = "Motorcykel")]
         Motorcycle
+    }
+    public class VehicleType
+    {
+        public int Id { get; set; }
+        public TypeOfVehicle? TypeOfVehicle { get; set; }
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }

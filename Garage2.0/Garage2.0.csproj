@@ -131,38 +131,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ParkedVehiclesController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\VehiclesController.cs" />
+    <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
-    <Compile Include="Enum\VehicleType.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Models\VehicleBase.cs" />
+    <Compile Include="Models\VehicleType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706140936280_DisplayFormatCheckInTime.cs" />
-    <Compile Include="Migrations\201706140936280_DisplayFormatCheckInTime.Designer.cs">
-      <DependentUpon>201706140936280_DisplayFormatCheckInTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140942552_DisplayFormatCheckInTimeII.cs" />
-    <Compile Include="Migrations\201706140942552_DisplayFormatCheckInTimeII.Designer.cs">
-      <DependentUpon>201706140942552_DisplayFormatCheckInTimeII.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706140945459_DisplayFormatCheckInTimeIII.cs" />
-    <Compile Include="Migrations\201706140945459_DisplayFormatCheckInTimeIII.Designer.cs">
-      <DependentUpon>201706140945459_DisplayFormatCheckInTimeIII.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706141023369_DisplayFormatCheckInTimeIV.cs" />
-    <Compile Include="Migrations\201706141023369_DisplayFormatCheckInTimeIV.Designer.cs">
-      <DependentUpon>201706141023369_DisplayFormatCheckInTimeIV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706150614420_Test.cs" />
-    <Compile Include="Migrations\201706150614420_Test.Designer.cs">
-      <DependentUpon>201706150614420_Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706141313290_Initial.cs" />
-    <Compile Include="Migrations\201706141313290_Initial.Designer.cs">
-      <DependentUpon>201706141313290_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ParkedVehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +185,22 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ParkedVehicles\Receipt.cshtml" />
+    <Content Include="Views\VehicleTypes\Create.cshtml" />
+    <Content Include="Views\VehicleTypes\Delete.cshtml" />
+    <Content Include="Views\VehicleTypes\Details.cshtml" />
+    <Content Include="Views\VehicleTypes\Edit.cshtml" />
+    <Content Include="Views\VehicleTypes\Index.cshtml" />
+    <Content Include="Views\Members\Create.cshtml" />
+    <Content Include="Views\Members\Delete.cshtml" />
+    <Content Include="Views\Members\Details.cshtml" />
+    <Content Include="Views\Members\Edit.cshtml" />
+    <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Vehicles\Create.cshtml" />
+    <Content Include="Views\Vehicles\Delete.cshtml" />
+    <Content Include="Views\Vehicles\Details.cshtml" />
+    <Content Include="Views\Vehicles\Edit.cshtml" />
+    <Content Include="Views\Vehicles\Index.cshtml" />
+    <Content Include="Views\Vehicles\DetailedIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -218,28 +213,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706141313290_Initial.resx">
-      <DependentUpon>201706141313290_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706140936280_DisplayFormatCheckInTime.resx">
-      <DependentUpon>201706140936280_DisplayFormatCheckInTime.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140942552_DisplayFormatCheckInTimeII.resx">
-      <DependentUpon>201706140942552_DisplayFormatCheckInTimeII.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706140945459_DisplayFormatCheckInTimeIII.resx">
-      <DependentUpon>201706140945459_DisplayFormatCheckInTimeIII.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706141023369_DisplayFormatCheckInTimeIV.resx">
-      <DependentUpon>201706141023369_DisplayFormatCheckInTimeIV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706150614420_Test.resx">
-      <DependentUpon>201706150614420_Test.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,11 +8,12 @@ namespace Garage2._0.DataAccess
 {
     public class GarageContext : DbContext
     {
-        public GarageContext() : base("Garage2.0")
+        public GarageContext() : base("Garage2.5")
         {
 
         }
-
-        public DbSet<Models.ParkedVehicle> ParkedVehicles { get; set; }
+        public DbSet<Models.Vehicle> Vehicles { get; set; }
+        public DbSet<Models.Member> Members { get; set; }
+        public DbSet<Models.VehicleType> VehicleTypes { get; set; }
     }
 }

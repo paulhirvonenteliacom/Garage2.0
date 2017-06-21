@@ -3,28 +3,40 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garage 2.0</title>
+    <title>Garage 2.5</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body style="color:darkblue;background-color:lightyellow;">
     <div style="background-color:darkblue;border-color:gold;" class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Garage 2.0", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Garage 2.5", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Parkera i vårt garage", "Index", "ParkedVehicles")</li>
-                    <li>@Html.ActionLink("Om oss", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                </ul>
+                @*<nav class="navbar navbar-inverse">*@
+                    @*<div class="container-fluid">*@
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tjänster<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="Members/Index">Medlemmar</a></li>
+                                <li><a href="VehicleBase/Index">Fordonsöversikt</a></li>
+                                <li><a href="Vehicles/Index">Detaljerad fordonsöversikt</a></li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Om oss", "About", "Home")</li>
+                        <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    </ul>
+                    @*</div>*@
+                @*</nav>*@
             </div>
+            @*</div>*@
         </div>
     </div>
     <div class="container body-content">

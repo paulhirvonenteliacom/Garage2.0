@@ -1,5 +1,4 @@
-﻿using Garage2._0.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,18 +6,14 @@ using System.Web;
 
 namespace Garage2._0.Models
 {
-    public class ParkedVehicle
+    public class Vehicle
     {
-        public ParkedVehicle()
+        public Vehicle()
         {
             CheckInTime = DateTime.Now;
         }
 
         public int Id { get; set; }
-
-        [Required]
-        [Display(Name = "Typ av fordon")]
-        public TypeOfVehicle TypeOfVehicle { get; set; }
 
         [Display(Name = "Registeringsnummer")]
         [Required(ErrorMessage = "{0} måste anges!")]
@@ -46,5 +41,12 @@ namespace Garage2._0.Models
         [Display(Name = "Check-in tid")]
         [DisplayFormat(DataFormatString = "{0: hh:mm:ss  ddd d MMM}")]
         public DateTime CheckInTime { get; set; }
+
+        public int MemberId { get; set; }
+
+        public int VehicleTypeId { get; set; }
+
+        public virtual Member Member { get; set; }
+        public virtual VehicleType VehicleType { get; set; }
     }
 }
