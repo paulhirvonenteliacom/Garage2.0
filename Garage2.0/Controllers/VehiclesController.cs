@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Garage2._0.DataAccess;
 using Garage2._0.Models;
+using System.Data.SqlClient;
 
 namespace Garage2._0.Controllers
 {
@@ -137,36 +138,14 @@ namespace Garage2._0.Controllers
             return View(vehicle);
         }
 
-        // GET: Vehicles/Create
-        public ActionResult Create()
-        {
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name");
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id");
-            return View();
-        }
-
-        // POST: Vehicles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,MemberId,VehicleTypeId")] Vehicle vehicle)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Vehicles.Add(vehicle);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
-            return View(vehicle);
-        }
-
         // GET: Vehicles/Park
         public ActionResult Park(string typeOfVehicle)
         {
+            if (db.Members.Count() == 0)
+            {
+                //ViewBag.ErrorMessage = "Medlemslistan är tom. Registrera minst en medlem först.";
+                return View("../Members/Create");
+            }
 
             ViewBag.MemberId = new SelectList(db.Members, "Id", "Name");
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id");

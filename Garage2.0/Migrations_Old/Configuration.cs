@@ -15,10 +15,10 @@ namespace Garage2._0.Migrations
 
         protected override void Seed(Garage2._0.DataAccess.GarageContext context)
         {
-            context.ParkedVehicles.AddOrUpdate(
+            context.Vehicles.AddOrUpdate(
 
-                pv => pv.RegNumber,
-                new Models.ParkedVehicle { TypeOfVehicle = Car, RegNumber = "QSW098", Brand = "BMW", Model = "520d", Color = "Svart", NoOfWheels = 4, CheckInTime = DateTime.Now },
+                v => v.RegNumber,
+                new Models.ParkedVehicle { VehicleType.TypeOfVehicle = Car, RegNumber = "QSW098", Brand = "BMW", Model = "520d", Color = "Svart", NoOfWheels = 4, CheckInTime = DateTime.Now },
                 new Models.ParkedVehicle { TypeOfVehicle = Car, RegNumber = "EDC321", Brand = "FIAT", Model = "500L", Color = "Gul", NoOfWheels = 4, CheckInTime = DateTime.Now },
                 new Models.ParkedVehicle { TypeOfVehicle = Car, RegNumber = "AQR564", Brand = "VW", Model = "Passat", Color = "Silver", NoOfWheels = 4, CheckInTime = DateTime.Now },
 

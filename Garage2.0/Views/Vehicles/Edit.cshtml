@@ -1,11 +1,10 @@
 ﻿@model Garage2._0.Models.Vehicle
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Ändra uppgifter";
 }
 
-<h2>Edit</h2>
-
+<h2>@ViewBag.Title om parkerat fordon</h2>
 
 @using (Html.BeginForm())
 {
@@ -82,7 +81,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+@Html.ActionLink("Tillbaka till garaget", "Index")
 </div>
 
 @section Scripts {
