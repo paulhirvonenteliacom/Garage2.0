@@ -135,6 +135,11 @@
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
+    <Compile Include="Migrations\201706220722262_init.cs" />
+    <Compile Include="Migrations\201706220722262_init.Designer.cs">
+      <DependentUpon>201706220722262_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehicleBase.cs" />
@@ -213,6 +218,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706220722262_init.resx">
+      <DependentUpon>201706220722262_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

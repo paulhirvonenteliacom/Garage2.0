@@ -10,11 +10,17 @@ namespace Garage2._0.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Namn")]
+        [Display(Name = "Medlemsnamn")]
         public string Name { get; set; }
 
+        [Display(Name = "Medlemsnummer")]
+        public string Membershipnumber { get; set; }
+
         [Display(Name = "Telefonnummer")]
-        public string PhoneNumber { get; set; }
+        public string Phonenumber { get; set; }
+
+        [Display(Name = "Adress")]
+        public string Address { get; set; }
 
         public virtual ICollection<Vehicle> Vehicles { get; set; }
     }

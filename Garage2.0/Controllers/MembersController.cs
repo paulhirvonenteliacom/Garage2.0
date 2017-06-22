@@ -16,12 +16,49 @@ namespace Garage2._0.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: Members
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.Members.ToList());
+        //}
+
+        //public ActionResult Index(string searchMember)
+        //{
+        //    var member = from m in db.Members select m;
+
+        //    if (!String.IsNullOrEmpty(searchMember))
+        //    {
+        //        member = member.Where(p => p.Name.StartsWith(searchMember));
+        //        return View(member);
+        //    }
+        //    return View(db.Members.ToList());
+        //}
+
+        //GET: Members/Details/5
+
+        public ActionResult Index(string option, string search)
         {
-            return View(db.Members.ToList());
+            var member = from m in db.Members select m;
+            if (option == "Name")
+            {
+                if (!String.IsNullOrEmpty(search))
+                {
+                    member = member.Where(p => p.Name.StartsWith(search));
+                    return View(member);
+                }
+                return View(db.Members.ToList());
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(search))
+                {
+                    member = member.Where(p => p.Membershipnumber.StartsWith(search));
+                    return View(member);
+                }
+                return View(db.Members.ToList());
+            }
         }
 
-        // GET: Members/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -47,7 +84,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,PhoneNumber")] Member member)
+        public ActionResult Create([Bind(Include = "Id,Name,Membershipnumber,Phonenumber,Adress")] Member member)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +116,7 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,PhoneNumber")] Member member)
+        public ActionResult Edit([Bind(Include = "Id,Name,Membershipnumber,Phonenumber,Adress")] Member member)
         {
             if (ModelState.IsValid)
             {
