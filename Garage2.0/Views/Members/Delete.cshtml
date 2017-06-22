@@ -6,13 +6,21 @@
 
 <h2>Avregistrera</h2>
 
-<h3>Är du säker att denna medlem ska tas bort?</h3>
+<h3>Är du säker att medlemen ska tas bort?</h3>
 <div>
-    @*<h4>Medlem</h4>*@
+    @*<h4>Member</h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Membershipnumber)
         </dt>
 
         <dd>
@@ -21,6 +29,14 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.Phonenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phonenumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
         </dt>
 
         <dd>
