@@ -60,14 +60,17 @@ namespace Garage2._0.Controllers
 
             List<VehicleBase> vehicleBaseList = new List<VehicleBase>();
 
-            foreach (var item in vehicles)
+            if (vehicles.Count() > 0)
             {
-                var vehicleBase = new VehicleBase();
-                vehicleBase.MemberName = item.Member.Name;
-                vehicleBase.VehicleType = item.VehicleType.TypeOfVehicle.ToString();
-                vehicleBase.RegNumber = item.RegNumber;
-                vehicleBase.CheckInTime = item.CheckInTime;
-                vehicleBaseList.Add(vehicleBase);
+                foreach (var item in vehicles)
+                {
+                    var vehicleBase = new VehicleBase();
+                    vehicleBase.MemberName = item.Member.Name;
+                    vehicleBase.VehicleType = item.VehicleType.TypeOfVehicle.ToString();
+                    vehicleBase.RegNumber = item.RegNumber;
+                    vehicleBase.CheckInTime = item.CheckInTime;
+                    vehicleBaseList.Add(vehicleBase);
+                }
             }
 
             ViewBag.NoOfParkedVehicles = vehicles.Count();
@@ -93,7 +96,7 @@ namespace Garage2._0.Controllers
                     case "BUS":
                         vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
                     case "BOAT":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "baatar"; ViewBag.TypeOfVehicle = "Boat"; break;
                     case "AIRPLANE":
                         vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
                     case "MOTORCYCLE":
@@ -120,7 +123,11 @@ namespace Garage2._0.Controllers
 
             ViewBag.NoOfParkedVehicles = vehicles.Count();
 
-            return View(vehicles.ToList());
+            if (vehicles.Count() >0)
+            {
+                return View(vehicles.ToList());
+            }
+            return View();
         }
 
         // GET: Vehicles/Details/5
@@ -231,7 +238,7 @@ namespace Garage2._0.Controllers
             Vehicle vehicle = db.Vehicles.Find(id);
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Receipt");
         }
 
         protected override void Dispose(bool disposing)

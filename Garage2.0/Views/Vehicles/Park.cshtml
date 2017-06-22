@@ -6,10 +6,10 @@
 
 <h2>@ViewBag.Title nytt fordon</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -19,11 +19,17 @@
                 @*@Html.EditorFor(model => model.Member.Name, new { htmlAttributes = new { @class = "form-control" } })*@
                 
                 
-                @Html.EnumDropDownListFor(model => model.Member.Name, htmlAttributes: new { @class = "form-control" })
-               
+                @*@Html.DropDownListFor(model => model.Member.Name, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.Member, new List<SelectListItem> { new SelectListItem { Value = model.Member.Name, Text = model.Member.Name }, new { @class = "form-control" } )
+                @*new List<SelectListItem>
+                    {
+                    new SelectListItem { Value = "0" , Text = "Option A" },
+                    new SelectListItem { Value = "1" , Text = "Option B" },
+                    new SelectListItem { Value = "2" , Text = "Option C" }
+                    },*@
 
-                @Html.ValidationMessageFor(model => model.Member.Name, "", new { @class = "text-danger" })
-            </div>
+                    @Html.ValidationMessageFor(model => model.Member.Name, "", new { @class = "text-danger" })
+</div>
         </div>
         <div class="form-group">
             <!-- if (!ViewBag.TypeOfVehicle.Equals("")) {}-->
