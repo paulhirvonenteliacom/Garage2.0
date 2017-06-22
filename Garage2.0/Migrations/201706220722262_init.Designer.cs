@@ -7,13 +7,13 @@ namespace Garage2._0.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class DisplayFormatCheckInTimeIV : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DisplayFormatCheckInTimeIV));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706141023369_DisplayFormatCheckInTimeIV"; }
+            get { return "201706220722262_init"; }
         }
         
         string IMigrationMetadata.Source

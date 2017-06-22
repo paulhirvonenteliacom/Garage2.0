@@ -135,25 +135,9 @@
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
-    <Compile Include="Migrations\201706211104413_InitialCreate.cs" />
-    <Compile Include="Migrations\201706211104413_InitialCreate.Designer.cs">
-      <DependentUpon>201706211104413_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706211152514_TypeOfVehicle.cs" />
-    <Compile Include="Migrations\201706211152514_TypeOfVehicle.Designer.cs">
-      <DependentUpon>201706211152514_TypeOfVehicle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706211243285_AddIdVehicleBase.cs" />
-    <Compile Include="Migrations\201706211243285_AddIdVehicleBase.Designer.cs">
-      <DependentUpon>201706211243285_AddIdVehicleBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706211329386_FordonstypVehicle.cs" />
-    <Compile Include="Migrations\201706211329386_FordonstypVehicle.Designer.cs">
-      <DependentUpon>201706211329386_FordonstypVehicle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706211355398_Medlemsnamn.cs" />
-    <Compile Include="Migrations\201706211355398_Medlemsnamn.Designer.cs">
-      <DependentUpon>201706211355398_Medlemsnamn.cs</DependentUpon>
+    <Compile Include="Migrations\201706220722262_init.cs" />
+    <Compile Include="Migrations\201706220722262_init.Designer.cs">
+      <DependentUpon>201706220722262_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
@@ -231,20 +215,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706211104413_InitialCreate.resx">
-      <DependentUpon>201706211104413_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706211152514_TypeOfVehicle.resx">
-      <DependentUpon>201706211152514_TypeOfVehicle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706211243285_AddIdVehicleBase.resx">
-      <DependentUpon>201706211243285_AddIdVehicleBase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706211329386_FordonstypVehicle.resx">
-      <DependentUpon>201706211329386_FordonstypVehicle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706211355398_Medlemsnamn.resx">
-      <DependentUpon>201706211355398_Medlemsnamn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706220722262_init.resx">
+      <DependentUpon>201706220722262_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
