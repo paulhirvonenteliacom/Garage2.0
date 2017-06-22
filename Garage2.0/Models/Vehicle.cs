@@ -42,10 +42,12 @@ namespace Garage2._0.Models
         [DisplayFormat(DataFormatString = "{0: hh:mm:ss  ddd d MMM}")]
         public DateTime CheckInTime { get; set; }
 
+        [Display(Name = "Medlem")]
         public int MemberId { get; set; }
 
         public int VehicleTypeId { get; set; }
 
+        [Display(Name = "Ägare")]
         public virtual Member Member { get; set; }
 
         [Display(Name = "Fordonstyp")]

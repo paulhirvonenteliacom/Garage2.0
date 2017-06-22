@@ -1,34 +1,21 @@
 ﻿@model Garage2._0.Models.Vehicle
 
 @{
-    ViewBag.Title = "Parkera fordon";
+    ViewBag.Title = "Edit";
 }
 
-<h2>@ViewBag.Title nytt fordon</h2>
+<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
+        <h4>Vehicle</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.MemberId, "Ägare", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MemberId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <!-- if (!ViewBag.TypeOfVehicle.Equals("")) {}-->
-            @Html.LabelFor(model => model.VehicleType.TypeOfVehicle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.VehicleType.TypeOfVehicle, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VehicleType.TypeOfVehicle, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <!--}-->
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.RegNumber, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -71,17 +58,31 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.MemberId, "MemberId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MemberId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VehicleTypeId, "VehicleTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VehicleTypeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VehicleTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Parkera fordonet" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-<h2>
-    @ViewBag.ErrorMessage @Html.ActionLink("Registrera ny medlem", "Members")
-</h2>
+
 <div>
-    @Html.ActionLink("Tillbaka till garaget", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

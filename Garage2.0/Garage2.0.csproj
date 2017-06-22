@@ -132,12 +132,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\Vehicles1Controller.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
     <Compile Include="Migrations\201706220722262_init.cs" />
     <Compile Include="Migrations\201706220722262_init.Designer.cs">
       <DependentUpon>201706220722262_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706221443205_DisplayNameMember.cs" />
+    <Compile Include="Migrations\201706221443205_DisplayNameMember.Designer.cs">
+      <DependentUpon>201706221443205_DisplayNameMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706221448092_DisplayNameChange.cs" />
+    <Compile Include="Migrations\201706221448092_DisplayNameChange.Designer.cs">
+      <DependentUpon>201706221448092_DisplayNameChange.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
@@ -201,6 +210,11 @@
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\Vehicles\Index.cshtml" />
     <Content Include="Views\Vehicles\DetailedIndex.cshtml" />
+    <Content Include="Views\Vehicles1\Create.cshtml" />
+    <Content Include="Views\Vehicles1\Delete.cshtml" />
+    <Content Include="Views\Vehicles1\Details.cshtml" />
+    <Content Include="Views\Vehicles1\Edit.cshtml" />
+    <Content Include="Views\Vehicles1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -217,6 +231,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706220722262_init.resx">
       <DependentUpon>201706220722262_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706221443205_DisplayNameMember.resx">
+      <DependentUpon>201706221443205_DisplayNameMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706221448092_DisplayNameChange.resx">
+      <DependentUpon>201706221448092_DisplayNameChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

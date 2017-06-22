@@ -65,6 +65,7 @@ namespace Garage2._0.Controllers
                 foreach (var item in vehicles)
                 {
                     var vehicleBase = new VehicleBase();
+                    vehicleBase.Id = item.Id;
                     vehicleBase.MemberName = item.Member.Name;
                     vehicleBase.VehicleType = item.VehicleType.TypeOfVehicle.ToString();
                     vehicleBase.RegNumber = item.RegNumber;
