@@ -16,9 +16,109 @@ namespace Garage2._0.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: Vehicles
-        public ActionResult Index()
+        public ActionResult Index(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "")
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+
+            ViewBag.Fordon = "fordon";
+            ViewBag.TypeOfVehicle = typeOfVehicle;
+
+            if (typeOfVehicle != "")
+            {
+                switch (typeOfVehicle.ToUpper())
+                {
+                    case "CAR":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+                    case "BUS":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+                    case "BOAT":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                    case "AIRPLANE":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+                    case "MOTORCYCLE":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                }
+                if (vehicles.Count() == 0) return HttpNotFound();
+            }
+
+            if (orderBy != "")
+                switch (orderBy.ToUpper())
+                {
+                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType); break;
+                    case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
+                    case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
+                    case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
+                    case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
+                    case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
+                }
+
+            if (!String.IsNullOrEmpty(searchNumberPlate))
+            {
+                vehicles = vehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
+            }
+
+            List<VehicleBase> vehicleBaseList = new List<VehicleBase>();
+
+            foreach (var item in vehicles)
+            {
+                var vehicleBase = new VehicleBase();
+                vehicleBase.MemberName = item.Member.Name;
+                vehicleBase.VehicleType = item.VehicleType.TypeOfVehicle.ToString();
+                vehicleBase.RegNumber = item.RegNumber;
+                vehicleBase.CheckInTime = item.CheckInTime;
+                vehicleBaseList.Add(vehicleBase);
+            }
+
+            ViewBag.NoOfParkedVehicles = vehicles.Count();
+
+            return View(vehicleBaseList);
+        }
+
+
+        // GET: Vehicles
+        public ActionResult DetailedIndex(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "")
+        {
+            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+
+            ViewBag.Fordon = "fordon";
+            ViewBag.TypeOfVehicle = typeOfVehicle;
+
+            if (typeOfVehicle != "")
+            {
+                switch (typeOfVehicle.ToUpper())
+                {
+                    case "CAR":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+                    case "BUS":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+                    case "BOAT":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                    case "AIRPLANE":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+                    case "MOTORCYCLE":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                }
+                if (vehicles.Count() == 0) return HttpNotFound();
+            }
+
+            if (orderBy != "")
+                switch (orderBy.ToUpper())
+                {
+                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType); break;
+                    case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
+                    case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
+                    case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
+                    case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
+                    case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
+                }
+
+            if (!String.IsNullOrEmpty(searchNumberPlate))
+            {
+                vehicles = vehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
+            }
+
+            ViewBag.NoOfParkedVehicles = vehicles.Count();
+
             return View(vehicles.ToList());
         }
 
@@ -63,6 +163,36 @@ namespace Garage2._0.Controllers
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
+
+        // GET: Vehicles/Park
+        public ActionResult Park(string typeOfVehicle)
+        {
+
+            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name");
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id");
+
+            ViewBag.TypeOfVehicle = typeOfVehicle;
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Park([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] Vehicle vehicle)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Vehicles.Add(vehicle);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+
+            return View(vehicle);
+        }
+
 
         // GET: Vehicles/Edit/5
         public ActionResult Edit(int? id)
@@ -145,7 +275,7 @@ namespace Garage2._0.Controllers
 //        // GET: ParkedVehicles/Index
 //        public ActionResult Index(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "")
 //        {
-//            var parkedVehicles = db.ParkedVehicles.Select(pv => pv);
+//            var vehicles = db.ParkedVehicles.Select(v => v);
 
 //            ViewBag.Fordon = "fordon";
 //            ViewBag.TypeOfVehicle = typeOfVehicle;
@@ -155,38 +285,38 @@ namespace Garage2._0.Controllers
 //                switch (typeOfVehicle.ToUpper())
 //                {
 //                    case "CAR":
-//                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+//                        vehicles = vehicles.Where(v => v.TypeOfVehicle == Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
 //                    case "BUS":
-//                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+//                        vehicles = vehicles.Where(v => v.TypeOfVehicle == Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
 //                    case "BOAT":
-//                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
+//                        vehicles = vehicles.Where(v => v.TypeOfVehicle == Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
 //                    case "AIRPLANE":
-//                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+//                        vehicles = vehicles.Where(v => v.TypeOfVehicle == Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
 //                    case "MOTORCYCLE":
-//                        parkedVehicles = parkedVehicles.Where(pv => pv.TypeOfVehicle == Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+//                        vehicles = vehicles.Where(v => v.TypeOfVehicle == Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
 //                }
-//                if (parkedVehicles.Count() == 0) return HttpNotFound();
+//                if (vehicles.Count() == 0) return HttpNotFound();
 //            }
 
 //            if (orderBy != "")
 //                switch (orderBy.ToUpper())
 //                {
-//                    case "TYPEOFVEHICLE": parkedVehicles = parkedVehicles.OrderBy(pv => pv.TypeOfVehicle); break;
-//                    case "REGNUMBER": parkedVehicles = parkedVehicles.OrderBy(pv => pv.RegNumber); break;
-//                    case "COLOR": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Color); break;
-//                    case "NOOFWHEELS": parkedVehicles = parkedVehicles.OrderBy(pv => pv.NoOfWheels); break;
-//                    case "BRAND": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Brand); break;
-//                    case "MODEL": parkedVehicles = parkedVehicles.OrderBy(pv => pv.Model); break;
+//                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.TypeOfVehicle); break;
+//                    case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
+//                    case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
+//                    case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
+//                    case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
+//                    case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
 //                }
 
 //            if (!String.IsNullOrEmpty(searchNumberPlate))
 //            {
-//                parkedVehicles = parkedVehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
+//                vehicles = vehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
 //            }
 
-//            ViewBag.NoOfParkedVehicles = parkedVehicles.Count();
+//            ViewBag.NoOfParkedVehicles = vehicles.Count();
 
-//            return View(parkedVehicles.ToList());
+//            return View(vehicles.ToList());
 //        }
 
 //        // GET: ParkedVehicles/Details/5

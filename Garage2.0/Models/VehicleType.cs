@@ -19,10 +19,14 @@ namespace Garage2._0.Models
         [Display(Name = "Motorcykel")]
         Motorcycle
     }
+
     public class VehicleType
     {
         public int Id { get; set; }
-        public TypeOfVehicle? TypeOfVehicle { get; set; }
+
+        [Display(Name = "Fordonstyp")]
+        public TypeOfVehicle TypeOfVehicle { get; set; }
+
         public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }

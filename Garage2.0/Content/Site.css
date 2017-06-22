@@ -57,3 +57,10 @@ a:visited { color:darkblue; }
 a:active  { color:#d00000; }
 a:hover   { color:#d00000; }
 a:focus   { color:#d00000; }
+
+table {
+    border-radius:10px; padding: 5px; /*border-spacing: 10px;*/
+}
+/*th, td {
+    padding: 5px;
+}*/

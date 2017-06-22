@@ -1,4 +1,4 @@
-﻿@model Garage2._0.Models.ParkedVehicle
+﻿@model Garage2._0.Models.Vehicle
 
 @{
     ViewBag.Title = "Kvitto";
@@ -13,8 +13,8 @@
         <dt>@Html.DisplayNameFor(model => model.RegNumber)</dt>
         <dd>@Html.DisplayFor(model => model.RegNumber)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.TypeOfVehicle)</dt>
-        <dd>@Html.DisplayFor(model => model.TypeOfVehicle)</dd>
+        <dt>@Html.DisplayNameFor(model => model.VehicleType.TypeOfVehicle)</dt>
+        <dd>@Html.DisplayFor(model => model.VehicleType.TypeOfVehicle)</dd>
 
         <dt>Check-in tid</dt>
         <dd>@Html.DisplayFor(model => model.CheckInTime)</dd>
