@@ -238,10 +238,32 @@ namespace Garage2._0.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle vehicle = db.Vehicles.Find(id);
-            db.Vehicles.Remove(vehicle);
+            Vehicle Vehicle = db.Vehicles.Find(id);
+            var checkOutTime = DateTime.Now;
+            TimeSpan parkingDuration = checkOutTime - Vehicle.CheckInTime;
+            ViewBag.CheckOutTime = checkOutTime;
+
+            ViewBag.ParkingFee = Fee(parkingDuration);
+            string pDuration;
+            if (parkingDuration.Days > 0)
+            {
+                pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
+            }
+            else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
+            ViewBag.ParkingDuration = pDuration;
+            ViewBag.TypeOfVehicle = Vehicle.VehicleType.TypeOfVehicle;
+            db.Vehicles.Remove(Vehicle);
             db.SaveChanges();
-            return RedirectToAction("Receipt");
+            return View("Receipt", Vehicle);
+        }
+
+        private decimal Fee(TimeSpan parkingDuration)
+        {
+            if ((parkingDuration.Minutes % 10) > 0 || ((parkingDuration.Minutes % 10 == 0) && (parkingDuration.Seconds > 0)))
+            {
+                return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10) + 1);
+            }
+            return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10));
         }
 
         protected override void Dispose(bool disposing)

@@ -148,6 +148,14 @@
     <Compile Include="Migrations\201706221448092_DisplayNameChange.Designer.cs">
       <DependentUpon>201706221448092_DisplayNameChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706271228147_DateFormatInView.cs" />
+    <Compile Include="Migrations\201706271228147_DateFormatInView.Designer.cs">
+      <DependentUpon>201706271228147_DateFormatInView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706271232542_DateFormatInVehicleBase.cs" />
+    <Compile Include="Migrations\201706271232542_DateFormatInVehicleBase.Designer.cs">
+      <DependentUpon>201706271232542_DateFormatInVehicleBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -237,6 +245,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706221448092_DisplayNameChange.resx">
       <DependentUpon>201706221448092_DisplayNameChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706271228147_DateFormatInView.resx">
+      <DependentUpon>201706271228147_DateFormatInView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706271232542_DateFormatInVehicleBase.resx">
+      <DependentUpon>201706271232542_DateFormatInVehicleBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
