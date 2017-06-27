@@ -50,31 +50,31 @@
 <table style="border-style:solid;border-color:darkblue;border-width:2px; border-radius:10px; padding: 5px;" class="table">
     <tr>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Member.Name).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Member.Name).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" })
         </th>
         <th>
             @if (ViewBag.TypeOfVehicle.Equals(""))
             {
-                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
+                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
             }
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Color).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Color" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Color).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Color" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.NoOfWheels).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "NoOfWheels" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.NoOfWheels).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "NoOfWheels" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Brand).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Brand" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Brand).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Brand" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Model).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Model" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Model).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Model" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime" })
         </th>
         <th></th>
     </tr>
@@ -94,31 +94,32 @@
                         {
                             if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Car)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "Index", new { typeOfVehicle = "Car" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "DetailedIndex", new { typeOfVehicle = "Car" })
                             }
                             else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "Index", new { typeOfVehicle = "Bus" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "DetailedIndex", new { typeOfVehicle = "Bus" })
                             }
                             else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "Index", new { typeOfVehicle = "Boat" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "DetailedIndex", new { typeOfVehicle = "Boat" })
                             }
                             else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "Index", new { typeOfVehicle = "Airplane" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "DetailedIndex", new { typeOfVehicle = "Airplane" })
                             }
                             else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "Index", new { typeOfVehicle = "Motorcycle" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "DetailedIndex", new { typeOfVehicle = "Motorcycle" })
                             }
                         }
                     }
-                    @*}*@
                 </td>
+
                 @*<td>
                     @Html.DisplayFor(modelItem => item.VehicleType)
                 </td>*@
+
                 <td>
                     @Html.DisplayFor(modelItem => item.RegNumber)
                 </td>

@@ -240,3 +240,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Garage2.0/Migrations/xConfiguration.cs

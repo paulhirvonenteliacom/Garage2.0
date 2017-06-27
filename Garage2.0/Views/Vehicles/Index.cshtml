@@ -86,7 +86,7 @@
                             {
                                 @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "Index", new { typeOfVehicle = "Bus" })
                             }
-                            else if (item.VehicleType == "Båt")
+                            else if (item.VehicleType == "Boat")
                             {
                                 @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "Index", new { typeOfVehicle = "Boat" })
                             }
@@ -100,6 +100,33 @@
                             }
                         }
                     }
+
+                    @*från DetailedIndex /Stefan 2017-06-27*@
+                    @*if (ViewBag.TypeOfVehicle.Equals(""))
+                        {
+                            if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Car)
+                            {
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "Index", new { typeOfVehicle = "Car" })
+                            }
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus)
+                            {
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "Index", new { typeOfVehicle = "Bus" })
+                            }
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat)
+                            {
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "Index", new { typeOfVehicle = "Boat" })
+                            }
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane)
+                            {
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "Index", new { typeOfVehicle = "Airplane" })
+                            }
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle)
+                            {
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "Index", new { typeOfVehicle = "Motorcycle" })
+                            }
+                        }*@
+
+
 
                 </td>
                 @*<td>

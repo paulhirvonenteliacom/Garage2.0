@@ -17,7 +17,7 @@ namespace Garage2._0.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: Vehicles
-        public ActionResult Index(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "")
+        public ActionResult Index(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "") //SearchNumberPlate=a&typeOfVehicle=Car&OrderBy=...
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
 
@@ -33,7 +33,7 @@ namespace Garage2._0.Controllers
                     case "BUS":
                         vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
                     case "BOAT":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "båtar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "baatar"; ViewBag.TypeOfVehicle = "Boat"; break;
                     case "AIRPLANE":
                         vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
                     case "MOTORCYCLE":
@@ -45,12 +45,13 @@ namespace Garage2._0.Controllers
             if (orderBy != "")
                 switch (orderBy.ToUpper())
                 {
-                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType); break;
+                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
                     case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
                     case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
                     case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
                     case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
                     case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
+                    case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); break;
                 }
 
             if (!String.IsNullOrEmpty(searchNumberPlate))
@@ -109,12 +110,13 @@ namespace Garage2._0.Controllers
             if (orderBy != "")
                 switch (orderBy.ToUpper())
                 {
-                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType); break;
+                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
                     case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
                     case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
                     case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
                     case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
                     case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
+                    case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); break;
                 }
 
             if (!String.IsNullOrEmpty(searchNumberPlate))

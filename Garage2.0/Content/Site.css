@@ -58,6 +58,14 @@ a:active  { color:#d00000; }
 a:hover   { color:#d00000; }
 a:focus   { color:#d00000; }
 
+/*@media print{
+       a:after{content:" (" attr(href) ") ";font-size:0.8em;font-weight:normal;}
+}*/
+
+@media print{
+       a:after{content:" (" attr(href) ") "; display:none; }
+}
+
 table {
     border-radius:10px; padding: 5px; /*border-spacing: 10px;*/
 }
