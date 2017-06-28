@@ -238,9 +238,9 @@ namespace Garage2._0.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle parkedVehicle = db.Vehicles.Find(id);
+            Vehicle Vehicle = db.Vehicles.Find(id);
             var checkOutTime = DateTime.Now;
-            TimeSpan parkingDuration = checkOutTime - parkedVehicle.CheckInTime;
+            TimeSpan parkingDuration = checkOutTime - Vehicle.CheckInTime;
             ViewBag.CheckOutTime = checkOutTime;
 
             ViewBag.ParkingFee = Fee(parkingDuration);
@@ -251,10 +251,10 @@ namespace Garage2._0.Controllers
             }
             else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
             ViewBag.ParkingDuration = pDuration;
-
-            db.Vehicles.Remove(parkedVehicle);
+            ViewBag.TypeOfVehicle = Vehicle.VehicleType.TypeOfVehicle;
+            db.Vehicles.Remove(Vehicle);
             db.SaveChanges();
-            return View("Receipt", parkedVehicle);
+            return View("Receipt", Vehicle);
         }
 
         private decimal Fee(TimeSpan parkingDuration)
@@ -265,28 +265,6 @@ namespace Garage2._0.Controllers
             }
             return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10));
         }
-
-        // POST: Vehicles/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id)
-        //{
-        //    Vehicle vehicle = db.Vehicles.Find(id);
-        //    db.Vehicles.Remove(vehicle);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Receipt");
-        //}
-
-        // POST: Vehicles/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Vehicle vehicle = db.Vehicles.Find(id);
-        //    db.Vehicles.Remove(vehicle);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Receipt");
-        //}
 
         protected override void Dispose(bool disposing)
         {
