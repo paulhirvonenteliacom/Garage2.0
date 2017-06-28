@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<Garage2._0.Models.Vehicle>
 
 @{
-    ViewBag.Title = "Parkerade " + ViewBag.Fordon + " i garaget";
+    ViewBag.Title = ViewBag.NoOfParkedVehicles+ " parkerade " + ViewBag.Fordon + " i garaget";/* <--singularis!! */
 }
+
 <h2>@ViewBag.Title</h2>
-<p>
+
+<p class="hidden-print">
     @if (ViewBag.Fordon.Equals("bilar"))
     {
         @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Car" });
@@ -32,8 +34,8 @@
 </p>
 
 <div>
-    <form method="GET" action="/Vehicles/Index">
-        <input type="submit" value="Sök" style="border-radius: 10px; color:darkblue; background-color:lightyellow; border-color:darkblue;" /> registreringsnummer som börjar på @Html.TextBox("SearchNumberPlate") på
+    <form method="GET" action="/Vehicles/Index" class="hidden-print">
+        <input type="submit" value="Sök"/> registreringsnummer som börjar på @Html.TextBox("SearchNumberPlate") på
         <select name="typeOfVehicle">
             <option selected="@ViewBag.TypeOfVehicle.Equals(String.Empty)" value="">alla fordon</option> <!-- eller value="AllKinds"> -->
             <option selected="@ViewBag.TypeOfVehicle.Equals("Car")" value="Car">bilar</option>
@@ -43,21 +45,27 @@
             <option selected="@ViewBag.TypeOfVehicle.Equals("Motorcycle")" value="Motorcycle">motorcyklar</option>
         </select> i garaget.
     </form>
-</div><br />
-<p>
+</div>
+
+@*<p>
     Antal @ViewBag.Fordon: @ViewBag.NoOfParkedVehicles
-</p>
-<table style="border-style:solid;border-color:darkblue;border-width:2px; border-radius:10px; padding: 5px;" class="table">
+</p>*@
+
+<br />
+
+<table class="table">
     <tr>
         <th>
             @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Member.Name).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" })
         </th>
-        <th>
+        
             @if (ViewBag.TypeOfVehicle.Equals(""))
-            {
+            { 
+                <th>
                 @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
+                </th>
             }
-        </th>
+
         <th>
             @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber" })
         </th>
@@ -76,7 +84,7 @@
         <th>
             @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime" })
         </th>
-        <th></th>
+        <th class="hidden-print"></th>
     </tr>
     @if (Model?.Count() > 0)
     {
@@ -86,35 +94,35 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Member.Name)
                 </td>
-                <td>
-
+               
                     @using Garage2._0.Models
                     @{
                         if (ViewBag.TypeOfVehicle.Equals(""))
                         {
-                            if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Car)
-                            {
+                            <td>
+                                @if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Car)
+                                {
                                 @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "DetailedIndex", new { typeOfVehicle = "Car" })
-                            }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus)
-                            {
+                                }
+                                else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus)
+                                {
                                 @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "DetailedIndex", new { typeOfVehicle = "Bus" })
-                            }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat)
-                            {
+                                }
+                                else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat)
+                                {
                                 @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "DetailedIndex", new { typeOfVehicle = "Boat" })
-                            }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane)
-                            {
+                                }
+                                else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane)
+                                {
                                 @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "DetailedIndex", new { typeOfVehicle = "Airplane" })
-                            }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle)
-                            {
+                                }
+                                else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle)
+                                {
                                 @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "DetailedIndex", new { typeOfVehicle = "Motorcycle" })
-                            }
+                                }
+                            </td>
                         }
                     }
-                </td>
 
                 @*<td>
                     @Html.DisplayFor(modelItem => item.VehicleType)
@@ -138,12 +146,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CheckInTime)
                 </td>
-                <td>
+                <td class="hidden-print">
                     @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Fordonsdetaljer", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Checka ut", "Delete", new { id = item.Id })
                 </td>
             </tr>
-                            }
-                        }
+        }
+    }
 </table>

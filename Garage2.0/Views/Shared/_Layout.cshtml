@@ -7,8 +7,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body style="color:darkblue;background-color:lightyellow;">
-    <div style="background-color:darkblue;border-color:gold;" class="navbar navbar-inverse navbar-fixed-top">
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -42,10 +42,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Garage 2.5</p><br />
+            <p>&copy; @DateTime.Now - Garage 2.5</p><br />
             <p>
-                <button type="button" id="utskrift" onclick="document.getElementById('utskrift').style.display = 'none'; window.print();"
-                        style="border-radius: 10px; color:darkblue; background-color:lightyellow; border-color:darkblue;">
+                <button type="button" id="utskrift" onclick="window.print();" class="hidden-print">
                     Utskrift av sidan
                 </button>
             </p>
