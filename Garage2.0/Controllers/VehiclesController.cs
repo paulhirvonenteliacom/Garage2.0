@@ -82,7 +82,7 @@ namespace Garage2._0.Controllers
 
 
         // GET: Vehicles
-        public ActionResult DetailedIndex(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "")
+        public ActionResult DetailedIndex(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "") //SearchNumberPlate=a&typeOfVehicle=Car&OrderBy=...
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
 
@@ -234,7 +234,7 @@ namespace Garage2._0.Controllers
             return View(vehicle);
         }
 
-        // POST: Vehicles/Delete/5
+        //POST: Vehicles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -459,7 +459,7 @@ namespace Garage2._0.Controllers
 //            string pDuration;
 //            if (parkingDuration.Days > 0)
 //            {
-//                pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
+//                pDuration = $"{parkingDuration:dd} dygn {parkingDuration:HH\\:mm\\:ss} (tt:mm:ss)";
 //            }
 //            else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
 //            ViewBag.ParkingDuration = pDuration;

@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<Garage2._0.Models.VehicleBase>
 
 @{
-    ViewBag.Title = "Parkerade " + ViewBag.Fordon + " i garaget";
+    ViewBag.Title = ViewBag.NoOfParkedVehicles + " " /*" parkerade "*/ + ViewBag.Fordon + " i garaget"; @*<--singularis!!*@
 }
 <h2>@ViewBag.Title</h2>
-<p>
+
+<p class="hidden-print">
     @if (ViewBag.Fordon.Equals("bilar"))
     {
         @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Bil" });
@@ -32,8 +33,8 @@
 </p>
 
 <div>
-    <form method="GET" action="/Vehicles/Index">
-        <input type="submit" value="Sök" style="border-radius: 10px; color:darkblue; background-color:lightyellow; border-color:darkblue;" /> registreringsnummer som börjar på @Html.TextBox("SearchNumberPlate") på
+    <form method="GET" action="/Vehicles/Index" class="hidden-print">
+        <input type="submit" value="Sök"/> registreringsnummer som börjar på @Html.TextBox("SearchNumberPlate") på
         <select name="typeOfVehicle">
             <option selected="@ViewBag.TypeOfVehicle.Equals(String.Empty)" value="">alla fordon</option> <!-- eller value="AllKinds"> -->
             <option selected="@ViewBag.TypeOfVehicle.Equals("Bil")" value="Bil">bilar</option>
@@ -42,29 +43,32 @@
             <option selected="@ViewBag.TypeOfVehicle.Equals("Flygplan")" value="Flygplan">flygplan</option>
             <option selected="@ViewBag.TypeOfVehicle.Equals("Motorcykel")" value="Motorcykel">motorcyklar</option>
         </select> i garaget.
-    </form>
-    @*</div><br />*@
-    <p>
+    </form><br />
+
+    @*<p>
         Antal @ViewBag.Fordon: @ViewBag.NoOfParkedVehicles
-    </p>
-    <table style="border-style:solid;border-color:darkblue;border-width:2px; border-radius:10px; padding: 5px;" class="table">
+    </p>*@
+
+    <table class="table">
         <tr>
             <th>
                 @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.MemberName).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" })
             </th>
-            <th>
+           
                 @if (ViewBag.TypeOfVehicle.Equals(""))
-            {
-                    @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
+                {
+                    <th>
+                        @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
+                    </th>
                 }
-            </th>
+ 
             <th>
                 @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber" })
             </th>
             <th>
                 @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime" })
             </th>
-            <th></th>
+            <th class="hidden-print"></th>
         </tr>
         @foreach (var item in Model)
         {
@@ -72,7 +76,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.MemberName)
                 </td>
-                <td>
+                
                     @using Garage2._0.Models
                     @{
                         if (ViewBag.TypeOfVehicle.Equals(""))
@@ -108,7 +112,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CheckInTime)
                 </td>
-                <td>
+                <td class="hidden-print">
                     @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Fordonsdetaljer", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Checka ut", "Delete", new { id = item.Id })
