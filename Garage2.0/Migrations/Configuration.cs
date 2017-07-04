@@ -43,23 +43,23 @@ namespace Garage2._0.Migrations
 
             var vehicleTypes = new List<VehicleType>
             {
-                new VehicleType { Id = 1, TypeOfVehicle = Car },
-                new VehicleType { Id = 2, TypeOfVehicle = Car },
-                new VehicleType { Id = 3, TypeOfVehicle = Car },
+                new VehicleType { Id = 1, TypeOfVehicle = Bil },
+                new VehicleType { Id = 2, TypeOfVehicle = Bil },
+                new VehicleType { Id = 3, TypeOfVehicle = Bil },
 
-                new VehicleType { Id = 4, TypeOfVehicle = Bus },
-                new VehicleType { Id = 5, TypeOfVehicle = Boat },
-                new VehicleType { Id = 6, TypeOfVehicle = Airplane },
+                new VehicleType { Id = 4, TypeOfVehicle = Buss },
+                new VehicleType { Id = 5, TypeOfVehicle = Båt },
+                new VehicleType { Id = 6, TypeOfVehicle = Flygplan },
 
-                new VehicleType { Id = 7, TypeOfVehicle = Car },
-                new VehicleType { Id = 8, TypeOfVehicle = Motorcycle },
-                new VehicleType { Id = 9, TypeOfVehicle = Airplane },
+                new VehicleType { Id = 7, TypeOfVehicle = Bil },
+                new VehicleType { Id = 8, TypeOfVehicle = Motorcykel },
+                new VehicleType { Id = 9, TypeOfVehicle = Flygplan },
 
-                new VehicleType { Id = 10, TypeOfVehicle = Bus },
-                new VehicleType { Id = 11, TypeOfVehicle = Boat },
-                new VehicleType { Id = 12, TypeOfVehicle = Airplane },
+                new VehicleType { Id = 10, TypeOfVehicle = Buss },
+                new VehicleType { Id = 11, TypeOfVehicle = Båt },
+                new VehicleType { Id = 12, TypeOfVehicle = Flygplan },
 
-                new VehicleType { Id = 13, TypeOfVehicle = Airplane }
+                new VehicleType { Id = 13, TypeOfVehicle = Flygplan }
             };
             vehicleTypes.ForEach(vt => context.VehicleTypes.AddOrUpdate(vt));
             context.SaveChanges();

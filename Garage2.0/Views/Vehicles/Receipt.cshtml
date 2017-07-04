@@ -51,7 +51,7 @@
         <dd>@Html.DisplayFor(model => model.CheckInTime)</dd>
 
         <dt>Check-ut tid</dt>
-        <dd>@ViewBag.CheckOutTime.ToString("HH:mm:ss" + " ddd d MMM")</dd>
+        <dd>@ViewBag.CheckOutTime.ToString("HH:mm:ss" + " ddd d MMM yyyy")</dd>
 
         <dt>Parkeringstid</dt>
         <dd>@ViewBag.ParkingDuration</dd>
@@ -60,7 +60,7 @@
         <dd>@ViewBag.ParkingFee SEK</dd>
 
         <dt>Varav moms (25%)</dt>
-        <dd>@(ViewBag.ParkingFee/4) SEK</dd>
+        <dd>@ViewBag.Vat SEK</dd>
     </dl>
 </div>
 <p>

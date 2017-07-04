@@ -7,23 +7,23 @@
 <p>
     @if (ViewBag.Fordon.Equals("bilar"))
     {
-        @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Car" });
+        @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Bil" });
     }
     else if (ViewBag.Fordon.Equals("bussar"))
     {
-        @Html.ActionLink("Parkera ny buss i garaget", "Park", new { typeOfVehicle = "Bus" });
+        @Html.ActionLink("Parkera ny buss i garaget", "Park", new { typeOfVehicle = "Buss" });
     }
-    else if (ViewBag.Fordon.Equals("baatar"))
+    else if (ViewBag.Fordon.Equals("båtar"))
     {
-        @Html.ActionLink("Parkera ny båt i garaget", "Park", new { typeOfVehicle = "Boat" });
+        @Html.ActionLink("Parkera ny båt i garaget", "Park", new { typeOfVehicle = "Båt" });
     }
     else if (ViewBag.Fordon.Equals("flygplan"))
     {
-        @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { typeOfVehicle = "Airplane" });
+        @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { typeOfVehicle = "Flygplan" });
     }
     else if (ViewBag.Fordon.Equals("motorcyklar"))
     {
-        @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { typeOfVehicle = "Motorcycle" });
+        @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { typeOfVehicle = "Motorcykel" });
     }
     else
     {
@@ -36,11 +36,11 @@
         <input type="submit" value="Sök" style="border-radius: 10px; color:darkblue; background-color:lightyellow; border-color:darkblue;" /> registreringsnummer som börjar på @Html.TextBox("SearchNumberPlate") på
         <select name="typeOfVehicle">
             <option selected="@ViewBag.TypeOfVehicle.Equals(String.Empty)" value="">alla fordon</option> <!-- eller value="AllKinds"> -->
-            <option selected="@ViewBag.TypeOfVehicle.Equals("Car")" value="Car">bilar</option>
-            <option selected="@ViewBag.TypeOfVehicle.Equals("Bus")" value="Bus">bussar</option>
-            <option selected="@ViewBag.TypeOfVehicle.Equals("Boat")" value="Boat">båtar</option>
-            <option selected="@ViewBag.TypeOfVehicle.Equals("Airplane")" value="Airplane">flygplan</option>
-            <option selected="@ViewBag.TypeOfVehicle.Equals("Motorcycle")" value="Motorcycle">motorcyklar</option>
+            <option selected="@ViewBag.TypeOfVehicle.Equals("Bil")" value="Bil">bilar</option>
+            <option selected="@ViewBag.TypeOfVehicle.Equals("Buss")" value="Buss">bussar</option>
+            <option selected="@ViewBag.TypeOfVehicle.Equals("Båt")" value="Båt">båtar</option>
+            <option selected="@ViewBag.TypeOfVehicle.Equals("Flygplan")" value="Flygplan">flygplan</option>
+            <option selected="@ViewBag.TypeOfVehicle.Equals("Motorcykel")" value="Motorcykel">motorcyklar</option>
         </select> i garaget.
     </form>
 </div><br />
@@ -86,40 +86,36 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Member.Name)
                 </td>
-                <td>
-
+                @*<td>*@
                     @using Garage2._0.Models
                     @{
                         if (ViewBag.TypeOfVehicle.Equals(""))
                         {
-                            if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Car)
+                        <td>
+                            @if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Bil)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "DetailedIndex", new { typeOfVehicle = "Car" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "DetailedIndex", new { typeOfVehicle = "Bil" })
                             }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus)
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Buss)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "DetailedIndex", new { typeOfVehicle = "Bus" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "DetailedIndex", new { typeOfVehicle = "Buss" })
                             }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat)
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Båt)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "DetailedIndex", new { typeOfVehicle = "Boat" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "DetailedIndex", new { typeOfVehicle = "Båt" })
                             }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane)
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Flygplan)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "DetailedIndex", new { typeOfVehicle = "Airplane" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "DetailedIndex", new { typeOfVehicle = "Flygplan" })
                             }
-                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle)
+                            else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcykel)
                             {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "DetailedIndex", new { typeOfVehicle = "Motorcycle" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "DetailedIndex", new { typeOfVehicle = "Motorcykel" })
                             }
+                        </td>
                         }
                     }
-                </td>
-
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.VehicleType)
-                </td>*@
-
+                @*</td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.RegNumber)
                 </td>
@@ -144,6 +140,6 @@
                     @Html.ActionLink("Checka ut", "Delete", new { id = item.Id })
                 </td>
             </tr>
-                            }
-                        }
+        }
+    }
 </table>

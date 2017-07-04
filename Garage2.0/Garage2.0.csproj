@@ -156,6 +156,14 @@
     <Compile Include="Migrations\201706271232542_DateFormatInVehicleBase.Designer.cs">
       <DependentUpon>201706271232542_DateFormatInVehicleBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706280634303_SwedishVehicleTypesInClass.cs" />
+    <Compile Include="Migrations\201706280634303_SwedishVehicleTypesInClass.Designer.cs">
+      <DependentUpon>201706280634303_SwedishVehicleTypesInClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707040734502_AddYearToCheckInTimeAndCheckOutTime.cs" />
+    <Compile Include="Migrations\201707040734502_AddYearToCheckInTimeAndCheckOutTime.Designer.cs">
+      <DependentUpon>201707040734502_AddYearToCheckInTimeAndCheckOutTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -251,6 +259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706271232542_DateFormatInVehicleBase.resx">
       <DependentUpon>201706271232542_DateFormatInVehicleBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280634303_SwedishVehicleTypesInClass.resx">
+      <DependentUpon>201706280634303_SwedishVehicleTypesInClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707040734502_AddYearToCheckInTimeAndCheckOutTime.resx">
+      <DependentUpon>201707040734502_AddYearToCheckInTimeAndCheckOutTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

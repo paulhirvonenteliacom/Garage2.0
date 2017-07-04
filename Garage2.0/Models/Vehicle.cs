@@ -39,7 +39,7 @@ namespace Garage2._0.Models
 
         [Editable(false)]
         [Display(Name = "Check-in tid")]
-        [DisplayFormat(DataFormatString = "{0: HH:mm:ss  ddd d MMM}")]
+        [DisplayFormat(DataFormatString = "{0: HH:mm:ss  ddd d MMM yyyy}")]
         public DateTime CheckInTime { get; set; }
 
         [Display(Name = "Medlem")]

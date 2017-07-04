@@ -26,19 +26,19 @@ namespace Garage2._0.Controllers
 
             if (typeOfVehicle != "")
             {
-                switch (typeOfVehicle.ToUpper())
-                {
-                    case "CAR":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
-                    case "BUS":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
-                    case "BOAT":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "baatar"; ViewBag.TypeOfVehicle = "Boat"; break;
-                    case "AIRPLANE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
-                    case "MOTORCYCLE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
-                }
+                //switch (typeOfVehicle.ToUpper())
+                //{
+                //    case "CAR":
+                //        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+                //    case "BUS":
+                //        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+                //    case "BOAT":
+                //        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "baatar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                //    case "AIRPLANE":
+                //        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+                //    case "MOTORCYCLE":
+                //        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                //}
                 if (vehicles.Count() == 0) return HttpNotFound();
             }
 
@@ -93,16 +93,16 @@ namespace Garage2._0.Controllers
             {
                 switch (typeOfVehicle.ToUpper())
                 {
-                    case "CAR":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
-                    case "BUS":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
-                    case "BOAT":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "baatar"; ViewBag.TypeOfVehicle = "Boat"; break;
-                    case "AIRPLANE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
-                    case "MOTORCYCLE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                    case "BIL":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bil); ViewBag.Fordon = "bilar"; break;
+                    case "BUSS":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Buss); ViewBag.Fordon = "bussar"; break;
+                    case "BÅTAR":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Båt); ViewBag.Fordon = "båtar"; break;
+                    case "FLYGPLAN":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Flygplan); ViewBag.Fordon = "flygplan"; break;
+                    case "MOTORCYKEL":
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcykel); ViewBag.Fordon = "motorcyklar"; break;
                 }
                 if (vehicles.Count() == 0) return HttpNotFound();
             }
@@ -215,6 +215,7 @@ namespace Garage2._0.Controllers
             }
             ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+
             return View(vehicle);
         }
 
@@ -243,11 +244,19 @@ namespace Garage2._0.Controllers
             TimeSpan parkingDuration = checkOutTime - Vehicle.CheckInTime;
             ViewBag.CheckOutTime = checkOutTime;
 
-            ViewBag.ParkingFee = Fee(parkingDuration);
+            var parkingFee = Math.Round(Fee(parkingDuration), 2);
+
+            ViewBag.ParkingFee = parkingFee.ToString("N2");
+            ViewBag.Vat = Math.Round(parkingFee / 4, 2).ToString("N2");
+
             string pDuration;
             if (parkingDuration.Days > 0)
             {
                 pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
+                if (pDuration.StartsWith("0"))
+                {
+                    pDuration = pDuration.Substring(1);
+                }
             }
             else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
             ViewBag.ParkingDuration = pDuration;
@@ -257,7 +266,7 @@ namespace Garage2._0.Controllers
             return View("Receipt", Vehicle);
         }
 
-        private decimal Fee(TimeSpan parkingDuration)
+        public decimal Fee(TimeSpan parkingDuration)
         {
             if ((parkingDuration.Minutes % 10) > 0 || ((parkingDuration.Minutes % 10 == 0) && (parkingDuration.Seconds > 0)))
             {

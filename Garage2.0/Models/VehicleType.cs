@@ -8,16 +8,16 @@ namespace Garage2._0.Models
 {
     public enum TypeOfVehicle
     {
-        [Display(Name = "Bil")]
-        Car,
-        [Display(Name = "Buss")]
-        Bus,
-        [Display(Name = "Båt")]
-        Boat,
-        [Display(Name = "Flygplan")]
-        Airplane,
-        [Display(Name = "Motorcykel")]
-        Motorcycle
+        //[Display(Name = "Bil")]
+        Bil,
+        //[Display(Name = "Buss")]
+        Buss,
+        //[Display(Name = "Båt")]
+        Båt,
+        //[Display(Name = "Flygplan")]
+        Flygplan,
+        //[Display(Name = "Motorcykel")]
+        Motorcykel
     }
 
     public class VehicleType
