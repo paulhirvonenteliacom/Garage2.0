@@ -1,9 +1,7 @@
 namespace Garage2._0.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
     using Garage2._0.Models;
     using static Models.TypeOfVehicle;
     using System.Collections.Generic;

@@ -167,11 +167,12 @@ namespace Garage2._0.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Park([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,MemberId,VehicleTypeId")] Vehicle vehicle)
+        public ActionResult Park([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,MemberId,VehicleTypeId")] Vehicle vehicle, [Bind(Include = "Id,TypeOfVehicle")] VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {
                 db.Vehicles.Add(vehicle);
+                db.VehicleTypes.Add(vehicleType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
