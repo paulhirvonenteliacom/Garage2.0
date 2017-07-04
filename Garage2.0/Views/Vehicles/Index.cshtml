@@ -34,7 +34,7 @@
 
 <div>
     <form method="GET" action="/Vehicles/Index" class="hidden-print">
-        <input type="submit" value="Sök"/> registreringsnummer som börjar på @Html.TextBox("SearchNumberPlate") på
+        <input type="submit" value="Sök" /> registreringsnummer som börjar på @Html.TextBox("SearchNumberPlate") på
         <select name="typeOfVehicle">
             <option selected="@ViewBag.TypeOfVehicle.Equals(String.Empty)" value="">alla fordon</option> <!-- eller value="AllKinds"> -->
             <option selected="@ViewBag.TypeOfVehicle.Equals("Bil")" value="Bil">bilar</option>
@@ -45,23 +45,19 @@
         </select> i garaget.
     </form><br />
 
-    @*<p>
-        Antal @ViewBag.Fordon: @ViewBag.NoOfParkedVehicles
-    </p>*@
-
     <table class="table">
         <tr>
             <th>
                 @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.MemberName).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" })
             </th>
-           
-                @if (ViewBag.TypeOfVehicle.Equals(""))
-                {
-                    <th>
-                        @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
-                    </th>
-                }
- 
+
+            @if (ViewBag.TypeOfVehicle.Equals(""))
+            {
+                <th>
+                    @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" })
+                </th>
+            }
+
             <th>
                 @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber" })
             </th>
@@ -76,7 +72,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.MemberName)
                 </td>
-                
+                <td>
                     @using Garage2._0.Models
                     @{
                         if (ViewBag.TypeOfVehicle.Equals(""))
@@ -105,7 +101,7 @@
                     }
 
                 </td>
- 
+
                 <td>
                     @Html.DisplayFor(modelItem => item.RegNumber)
                 </td>
@@ -118,6 +114,6 @@
                     @Html.ActionLink("Checka ut", "Delete", new { id = item.Id })
                 </td>
             </tr>
-                        }
+        }
     </table>
 </div>

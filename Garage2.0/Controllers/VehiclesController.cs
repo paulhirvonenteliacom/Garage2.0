@@ -167,7 +167,7 @@ namespace Garage2._0.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Park([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] Vehicle vehicle)
+        public ActionResult Park([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,MemberId,VehicleTypeId")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -239,9 +239,9 @@ namespace Garage2._0.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vehicle Vehicle = db.Vehicles.Find(id);
+            Vehicle vehicle = db.Vehicles.Find(id);
             var checkOutTime = DateTime.Now;
-            TimeSpan parkingDuration = checkOutTime - Vehicle.CheckInTime;
+            TimeSpan parkingDuration = checkOutTime - vehicle.CheckInTime;
             ViewBag.CheckOutTime = checkOutTime;
 
             var parkingFee = Math.Round(Fee(parkingDuration), 2);
@@ -260,10 +260,10 @@ namespace Garage2._0.Controllers
             }
             else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
             ViewBag.ParkingDuration = pDuration;
-            ViewBag.TypeOfVehicle = Vehicle.VehicleType.TypeOfVehicle;
-            db.Vehicles.Remove(Vehicle);
+            ViewBag.TypeOfVehicle = vehicle.VehicleType.TypeOfVehicle;
+            db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            return View("Receipt", Vehicle);
+            return View("Receipt", vehicle);
         }
 
         public decimal Fee(TimeSpan parkingDuration)

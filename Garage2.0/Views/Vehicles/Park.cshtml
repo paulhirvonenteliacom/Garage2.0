@@ -20,15 +20,14 @@
                 @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })
             </div>
         </div>
+        
         <div class="form-group">
-            <!-- if (!ViewBag.TypeOfVehicle.Equals("")) {}-->
             @Html.LabelFor(model => model.VehicleType.TypeOfVehicle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.VehicleType.TypeOfVehicle, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VehicleType.TypeOfVehicle, "", new { @class = "text-danger" })
             </div>
         </div>
-        <!--}-->
 
         <div class="form-group">
             @Html.LabelFor(model => model.RegNumber, htmlAttributes: new { @class = "control-label col-md-2" })
